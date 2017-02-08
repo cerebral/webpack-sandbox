@@ -13,6 +13,7 @@ var zip = require('./zip');
 var cors = require('cors');
 var fs = require('fs');
 var mime = require('mime')
+var preLoadPackages = require('./preLoadPackages')
 var clienttool = fs.readFileSync(path.resolve('src', 'clienttool.js'))
   .toString()
   .replace(/\{\{ORIGIN\}\}/g, JSON.stringify('http://localhost:3000'))
@@ -20,6 +21,11 @@ var clienttool = fs.readFileSync(path.resolve('src', 'clienttool.js'))
 // Init
 memoryFs.fs.mkdirpSync(path.join('/', 'app'));
 setInterval(sessions.clean, 60 * 1000 * 60 * 5);
+
+preLoadPackages([
+  'style-loader',
+  'css-loader'
+]);
 
 app.use(cookieParser());
 app.use(cors({
