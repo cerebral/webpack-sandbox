@@ -19,7 +19,7 @@ module.exports = {
 
         return new Promise(function (resolve, reject) {
           var compiler = webpack({
-            devtool: 'cheap-module-eval-source-map',
+            devtool: 'cheap-source-map',
             entry: {
               app: path.join('/', 'app', session.id, utils.getEntry(session.files))
             },

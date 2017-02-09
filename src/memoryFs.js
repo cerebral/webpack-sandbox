@@ -15,7 +15,7 @@ module.exports = {
         fs.writeFileSync(
           path.join('/', 'app', session.id, file.name),
           file.content.replace('</head>', [
-            '   <script src="/clienttool/v1"></script>',
+            '   <script src="/clienttool/v1" crossorigin></script>',
             session.packages ? '   <script src="' + config.dllServiceUrl + '/' + utils.getDllName(session.packages) + '/dll.js"></script>' : '',
             '</head>'
           ].join('\n'))

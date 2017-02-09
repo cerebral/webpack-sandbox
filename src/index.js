@@ -43,8 +43,8 @@ app.get('/project.zip', zip);
 // Just for cache busting
 app.get('/clienttool/:version', function (req, res) {
   res.setHeader('Cache-Control', 'max-age=31536000');
-  res.setHeader("Content-Type", mime.lookup('clienttool.js'));
-  res.setHeader("Content-Length", clienttool.length);
+  res.setHeader('Content-Type', mime.lookup('clienttool.js'));
+  res.setHeader('Content-Length', clienttool.length);
 
   return res.send(clienttool);
 })
