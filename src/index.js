@@ -53,10 +53,10 @@ app.get('/*', sandbox.getFile)
 
 console.log('Running Webpack Sandbox version: ', require('../package.json').version);
 
-app.listen(process.env.NODE_ENV === 'production' ? process.env.PORT : 4000);
+var server = app.listen(process.env.NODE_ENV === 'production' ? process.env.PORT : 4000);
 
 process.on('SIGTERM', function () {
-  app.close(function () {
+  server.close(function () {
     console.log('Graceful shutdown successful');
     process.exit(0);
   });
