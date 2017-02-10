@@ -5,6 +5,7 @@
   "dllServiceUrl": "https://webpack-dll.herokuapps.com",
   "cookie": {
     "maxAge": 86400000,
-    "domain": "webpackbin-test.firebaseapp.com"
+    "domain": "webpackbin-test.firebaseapp.com",
+    "secure": true
   }
 }

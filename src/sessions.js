@@ -40,7 +40,8 @@ var sessionsModule = {
       res.cookie('webpack_sandbox', String(id), {
         maxAge: config.cookie.maxAge,
         domain: config.cookie.domain,
-        httpOnly: true
+        httpOnly: true,
+        secure: Boolean(config.cookie.secure)
       });
     }
     next();
