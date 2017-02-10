@@ -14,7 +14,7 @@ var zip = require('./zip');
 var cors = require('cors');
 var fs = require('fs');
 var mime = require('mime')
-var preLoadPackages = require('./preLoadPackages')
+var preloadPackages = require('./preloadPackages')
 var clienttool = fs.readFileSync(path.resolve('src', 'clienttool.js'))
   .toString()
   .replace(/\{\{ORIGIN\}\}/g, JSON.stringify(config.clientOrigin))
@@ -23,7 +23,7 @@ var clienttool = fs.readFileSync(path.resolve('src', 'clienttool.js'))
 memoryFs.fs.mkdirpSync(path.join('/', 'app'));
 setInterval(sessions.clean, config.sessionsCleanInterval);
 
-preLoadPackages([
+preloadPackages([
   'style-loader',
   'css-loader'
 ]);
