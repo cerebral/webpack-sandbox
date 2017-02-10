@@ -4,7 +4,7 @@
   "description": "A service that takes code and DLL manifests and produces a server side bundling process",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index",
+    "start": "WEBPACK_SANDBOX_ENV=webpack-sandbox-dev node src/index",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

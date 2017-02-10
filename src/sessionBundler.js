@@ -27,12 +27,6 @@ module.exports = {
               path: path.join('/', 'app', session.id),
               filename: 'bundle.js'
             },
-            resolveLoader: {
-              // root: path.resolve('node_modules')
-            },
-            resolve: {
-              // root: path.join('/', 'node_modules')
-            },
             module: {
               loaders: createLoaders(session.loaders)
             },

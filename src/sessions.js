@@ -1,3 +1,4 @@
+var config = require(`../configs/${process.env.WEBPACK_SANDBOX_ENV}.json`);
 var utils = require('./utils.js');
 var path = require('path');
 var uuid = require('uuid');
@@ -24,21 +25,21 @@ var sessionsModule = {
   clean: function () {
     var now = Date.now();
     sessions = Object.keys(sessions).filter(function (key) {
-      return now - sessions[key].lastUpdate < 60 * 1000 * 30; // Clean up after 30 min of inactivity
+      return now - sessions[key].lastUpdate < config.sessionsMaxAge;
     }).reduce(function (remainingSessions, key) {
       remainingSessions[key] = sessions[key];
       return remainingSessions;
     }, {});
   },
   middleware: function (req, res, next) {
-    if (req.cookies.webpacksandbox && sessionsModule.get(req.cookies.webpacksandbox)) {
-      req.session = sessionsModule.get(req.cookies.webpacksandbox);
+    if (req.cookies.webpack_sandbox && sessionsModule.get(req.cookies.webpack_sandbox)) {
+      req.session = sessionsModule.get(req.cookies.webpack_sandbox);
     } else {
       var id = uuid.v4();
       req.session = sessionsModule.set(id);
-      res.cookie('webpacksandbox', String(id), {
-        maxAge: 3600000 * 24, // One day
-        domain: utils.isProduction() ? '.webpackbin.com' : '',
+      res.cookie('webpack_sandbox', String(id), {
+        maxAge: config.cookie.maxAge,
+        domain: config.cookie.domain,
         httpOnly: true
       });
     }

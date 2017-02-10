@@ -1,0 +1,10 @@
+{
+  "clientOrigin": "https://webpack-test.herokuapps.com",
+  "sessionsCleanInterval": 18000000,
+  "sessionsMaxAge": 1800000,
+  "dllServiceUrl": "https://webpack-dll.herokuapps.com",
+  "cookie": {
+    "maxAge": 86400000,
+    "domain": "https://webpack-test.firebaseapp.com"
+  }
+}

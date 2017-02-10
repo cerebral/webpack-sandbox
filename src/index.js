@@ -1,3 +1,4 @@
+var config = require(`../configs/${process.env.WEBPACK_SANDBOX_ENV}.json`);
 var server = require('http').createServer();
 var express = require('express');
 var compression = require('compression');
@@ -16,11 +17,11 @@ var mime = require('mime')
 var preLoadPackages = require('./preLoadPackages')
 var clienttool = fs.readFileSync(path.resolve('src', 'clienttool.js'))
   .toString()
-  .replace(/\{\{ORIGIN\}\}/g, JSON.stringify('http://localhost:3000'))
+  .replace(/\{\{ORIGIN\}\}/g, JSON.stringify(config.clientOrigin))
 
 // Init
 memoryFs.fs.mkdirpSync(path.join('/', 'app'));
-setInterval(sessions.clean, 60 * 1000 * 60 * 5);
+setInterval(sessions.clean, config.sessionsCleanInterval);
 
 preLoadPackages([
   'style-loader',
@@ -29,7 +30,7 @@ preLoadPackages([
 
 app.use(cookieParser());
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: config.clientOrigin,
   credentials: true
 }));
 app.use(compression())
@@ -53,3 +54,10 @@ app.get('/*', sandbox.getFile)
 console.log('Running Webpack Sandbox version: ', require('../package.json').version);
 
 app.listen(process.env.NODE_ENV === 'production' ? process.env.PORT : 4000);
+
+process.on('SIGTERM', function () {
+  app.close(function () {
+    console.log('Graceful shutdown successful');
+    process.exit(0);
+  });
+})

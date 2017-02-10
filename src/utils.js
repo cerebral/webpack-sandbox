@@ -1,4 +1,4 @@
-var config = require('../config')[process.env.WEBPACK_WS_ENV || 'dev'];
+var config = require(`../configs/${process.env.WEBPACK_SANDBOX_ENV}`);
 var path = require('path');
 var semver = require('semver');
 var request = require('request');

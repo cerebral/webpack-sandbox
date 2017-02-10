@@ -2,7 +2,7 @@ var MemoryFileSystem = require('memory-fs');
 var path = require('path');
 var fs = new MemoryFileSystem();
 var utils = require('./utils');
-var config = require('../config')[process.env.WEBPACK_WS_ENV || 'dev'];
+var config = require(`../configs/${process.env.WEBPACK_SANDBOX_ENV}.json`)
 
 module.exports = {
   fs: fs,
@@ -16,7 +16,7 @@ module.exports = {
           path.join('/', 'app', session.id, file.name),
           file.content.replace('</head>', [
             '   <script src="/clienttool/v1" crossorigin></script>',
-            session.packages ? '   <script src="' + config.dllServiceUrl + '/' + utils.getDllName(session.packages) + '/dll.js"></script>' : '',
+            session.packages ? '   <script src="' + config.dllServiceUrl + '/' + utils.getDllName(session.packages) + '/dll.js" crossorigin></script>' : '',
             '</head>'
           ].join('\n'))
         );
