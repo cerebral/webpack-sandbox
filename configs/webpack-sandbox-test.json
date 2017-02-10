@@ -4,6 +4,8 @@
   "sessionsMaxAge": 1800000,
   "dllServiceUrl": "https://webpack-dll.herokuapps.com",
   "cookie": {
-    "maxAge": 86400000
+    "maxAge": 86400000,
+    "domain": "webpackbin-sandbox.herokuapp.com",
+    "secure": true
   }
 }
