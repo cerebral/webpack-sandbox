@@ -5,7 +5,7 @@
   "dllServiceUrl": "https://webpack-dll.herokuapps.com",
   "cookie": {
     "maxAge": 86400000,
-    "domain": "webpackbin-sandbox.herokuapp.com",
+    "domain": "webpack-sandbox.herokuapp.com",
     "secure": true
   }
 }
