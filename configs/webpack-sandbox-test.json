@@ -4,7 +4,6 @@
   "sessionsMaxAge": 1800000,
   "dllServiceUrl": "https://webpack-dll.herokuapps.com",
   "cookie": {
-    "maxAge": 86400000,
-    "domain": ".firebaseapp.com"
+    "maxAge": 86400000
   }
 }
