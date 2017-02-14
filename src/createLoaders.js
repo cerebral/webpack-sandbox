@@ -39,6 +39,9 @@ module.exports = function (currentLoaders) {
     if (currentLoaders.babel.classProperties) {
       loader.query.plugins.push(require.resolve('babel-plugin-transform-class-properties'))
     }
+    if (currentLoaders.babel.inferno) {
+      loader.query.plugins.push(require.resolve('babel-plugin-inferno'))
+    }
 
     loaders.push(loader);
   }
