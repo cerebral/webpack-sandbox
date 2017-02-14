@@ -18,21 +18,28 @@ module.exports = function (currentLoaders) {
       }
     };
     if (currentLoaders.babel.es2015) {
-      loader.query.presets.push('es2015');
+      loader.query.presets.push(require.resolve('babel-preset-es2015'));
     }
     if (currentLoaders.babel.react) {
-      loader.query.presets.push('react');
+      loader.query.presets.push(require.resolve('babel-preset-react'));
     }
     if (currentLoaders.babel.stage0) {
-      loader.query.presets.push('stage-0');
+      loader.query.presets.push(require.resolve('babe-preset-stage-0'));
     }
     if (currentLoaders.babel.jsx) {
       loader.query.plugins.push([
-        'transform-react-jsx', {
+        require.resolve('babel-plugin-transform-react-jsx'), {
           pragma: currentLoaders.babel.jsx.pragma
         }
       ]);
     }
+    if (currentLoaders.babel.decorators) {
+      loader.query.plugins.push(require.resolve('babel-plugin-transform-decorators-legacy'))
+    }
+    if (currentLoaders.babel.classProperties) {
+      loader.query.plugins.push(require.resolve('babel-plugin-transform-class-properties'))
+    }
+
     loaders.push(loader);
   }
 
