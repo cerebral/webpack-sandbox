@@ -24,7 +24,7 @@ module.exports = function (currentLoaders) {
       loader.query.presets.push(require.resolve('babel-preset-react'));
     }
     if (currentLoaders.babel.stage0) {
-      loader.query.presets.push(require.resolve('babe-preset-stage-0'));
+      loader.query.presets.push(require.resolve('babel-preset-stage-0'));
     }
     if (currentLoaders.babel.jsx) {
       loader.query.plugins.push([
