@@ -1,3 +1,4 @@
+
 module.exports = function (currentLoaders) {
 
   var loaders = [];
@@ -55,7 +56,7 @@ module.exports = function (currentLoaders) {
     }
 
     if (currentLoaders.css.modules) {
-      loader.loader = 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]';
+      loader.loader = 'style-loader!css-loader?modules&localIdentName=[name]---[local]---[hash:base64:5]';
     }
     loaders.push(loader);
   }
@@ -65,10 +66,11 @@ module.exports = function (currentLoaders) {
     var loader = {
       test: /\.ts?$|\.tsx?$/,
       loader: 'ts-loader',
-      query: {
+      options: {
         transpileOnly: true,
         isolatedModules: true,
         silent: true,
+        files: ['just-a-hack'],
         compilerOptions: {
           jsx: 'react',
           target: 'es5'
@@ -123,11 +125,11 @@ module.exports = function (currentLoaders) {
     loaders.push(loader);
   }
 
-  // JADE
-  if (currentLoaders.jade) {
+  // PUG
+  if (currentLoaders.pug) {
     var loader = {
-      test: /\.jade?$/,
-      loader: 'jade-loader'
+      test: /\.pug?$/,
+      loader: 'pug-loader'
     }
     loaders.push(loader);
   }

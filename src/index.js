@@ -1,3 +1,4 @@
+require('./babelLoaderHack')
 var config = require(`../configs/${process.env.WEBPACK_SANDBOX_ENV}.json`);
 var server = require('http').createServer();
 var express = require('express');
@@ -25,7 +26,10 @@ setInterval(sessions.clean, config.sessionsCleanInterval);
 
 preloadPackages([
   'style-loader',
-  'css-loader'
+  'css-loader',
+  'pug-runtime',
+  'handlebars',
+  'webpack'
 ]);
 
 app.use(cookieParser());

@@ -3,6 +3,7 @@ var memoryFs = require('./memoryFs');
 var path = require('path');
 var utils = require('./utils');
 var createLoaders = require('./createLoaders');
+var fs = require('fs')
 
 module.exports = {
   create: function (session) {
@@ -26,6 +27,12 @@ module.exports = {
             output: {
               path: path.join('/', 'app', session.id),
               filename: 'bundle.js'
+            },
+            resolveLoader: {
+              modules: [path.resolve('node_modules'), path.join('/', 'node_modules')]
+            },
+            resolve: {
+              modules: [path.resolve('node_modules'), path.join('/', 'node_modules')]
             },
             module: {
               loaders: createLoaders(session.loaders)
