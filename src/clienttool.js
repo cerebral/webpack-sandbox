@@ -7,6 +7,17 @@
     window.parent.postMessage({type: "click"}, {{ORIGIN}});
   });
 
+  document.addEventListener('keydown', function (event) {
+    if (!event.crlKey && !event.metaKey) {
+      return
+    }
+
+    if (event.keyCode === 83) {
+      event.preventDefault()
+      window.parent.postMessage({type: "save"}, {{ORIGIN}});
+    }
+  });
+
   function getFunctionName(fun) {
     var ret = fun.toString();
     ret = ret.substr('function '.length);
