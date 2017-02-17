@@ -62,9 +62,25 @@
     }}, {{ORIGIN}});
   };
 
+  window.addEventListener('hashchange', function () {
+    window.parent.postMessage({type: "hash", value: location.hash}, {{ORIGIN}});
+  })
+
   window.bin = {
     log: function (value) {
       window.parent.postMessage({type: "log", value: createValue(value)}, {{ORIGIN}});
     }
   };
+
+  window.onmessage = function (event) {
+    if (event.data.type === 'hash') {
+      location.hash = event.data.value
+    }
+    if (event.data.type === 'back') {
+      window.history.back()
+    }
+    if (event.data.type === 'forward') {
+      window.history.forward()
+    }
+  }
 }(window));
