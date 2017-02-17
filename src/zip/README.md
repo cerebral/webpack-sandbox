@@ -6,4 +6,4 @@
 
 `npm start`
 
-Go to `localhost:8080`
+Go to `localhost:3000`

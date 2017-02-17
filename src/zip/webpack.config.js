@@ -9,7 +9,7 @@ module.exports = {
   entry: path.resolve('src', 'main.js'),
   output: {
     path: path.resolve('build'),
-    filename: '[name].js',
+    filename: 'main.js',
     publicPath: '/'
   },
   plugins: [

@@ -14,7 +14,11 @@ var sessionsModule = {
     return session;
   },
   set: function (id) {
-    sessions[id] = {id: id, lastUpdate: Date.now(), files: []};
+    sessions[id] = {
+      id: id,
+      lastUpdate: Date.now(),
+      files: []
+    };
 
     return sessions[id];
   },
