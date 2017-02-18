@@ -14,11 +14,12 @@ var sandbox = require('./sandbox');
 var zip = require('./zip');
 var cors = require('cors');
 var fs = require('fs');
-var mime = require('mime')
-var preloadPackages = require('./preloadPackages')
+var mime = require('mime');
+var preloadPackages = require('./preloadPackages');
 var clienttool = fs.readFileSync(path.resolve('src', 'clienttool.js'))
   .toString()
-  .replace(/\{\{ORIGIN\}\}/g, JSON.stringify(config.clientOrigin))
+  .replace(/\{\{ORIGIN\}\}/g, JSON.stringify(config.clientOrigin));
+
 
 // Init
 memoryFs.fs.mkdirpSync(path.join('/', 'app'));
@@ -46,7 +47,7 @@ app.get('/', sandbox.getIndex);
 app.get('/project.zip', zip);
 
 // Just for cache busting
-app.get('/clienttool/:version', function (req, res) {
+app.get(`/clienttool/:version`, function (req, res) {
   res.setHeader('Cache-Control', 'max-age=31536000');
   res.setHeader('Content-Type', mime.lookup('clienttool.js'));
   res.setHeader('Content-Length', clienttool.length);

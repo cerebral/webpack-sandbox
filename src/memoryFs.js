@@ -3,6 +3,8 @@ var path = require('path');
 var fs = new MemoryFileSystem();
 var utils = require('./utils');
 var config = require(`../configs/${process.env.WEBPACK_SANDBOX_ENV}.json`)
+var md5File = require('md5-file');
+var clienttoolHash = md5File.sync(path.resolve('src', 'clienttool.js'))
 
 module.exports = {
   fs: fs,
@@ -15,7 +17,7 @@ module.exports = {
         fs.writeFileSync(
           path.join('/', 'app', session.id, file.name),
           file.content.replace('</head>', [
-            '   <script src="/clienttool/v1" crossorigin></script>',
+            '   <script src="/clienttool/' + clienttoolHash + '" crossorigin></script>',
             utils.sessionHasPackages(session) ? '   <script src="' + config.dllServiceUrl + '/' + utils.getDllName(session.packages) + '/dll.js" crossorigin></script>' : '',
             '</head>'
           ].join('\n'))

@@ -62,8 +62,8 @@
     }}, {{ORIGIN}});
   };
 
-  window.addEventListener('hashchange', function () {
-    window.parent.postMessage({type: "hash", value: location.hash}, {{ORIGIN}});
+  window.addEventListener('popstate', function () {
+    window.parent.postMessage({type: "url", value: location.href.replace(location.origin, '')}, {{ORIGIN}});
   })
 
   window.bin = {
@@ -73,8 +73,8 @@
   };
 
   window.onmessage = function (event) {
-    if (event.data.type === 'hash') {
-      location.hash = event.data.value
+    if (event.data.type === 'url') {
+      window.history.pushState(null, null, event.data.value)
     }
     if (event.data.type === 'back') {
       window.history.back()
