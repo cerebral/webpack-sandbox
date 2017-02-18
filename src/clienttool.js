@@ -87,7 +87,7 @@
 
   window.onmessage = function (event) {
     if (event.data.type === 'url') {
-      window.history.pushState(null, null, event.data.value)
+      location.href = location.origin + event.data.value
     }
     if (event.data.type === 'back') {
       window.history.back()
