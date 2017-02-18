@@ -62,9 +62,22 @@
     }}, {{ORIGIN}});
   };
 
-  window.addEventListener('popstate', function () {
+  function onUrlChange () {
     window.parent.postMessage({type: "url", value: location.href.replace(location.origin, '')}, {{ORIGIN}});
-  })
+  }
+
+  window.addEventListener('hashchange', onUrlChange)
+
+  var pushState = history.pushState;
+  history.pushState = function(state) {
+    if (typeof history.onpushstate == "function") {
+        history.onpushstate({state: state});
+    }
+
+    pushState.apply(history, arguments);
+
+    onUrlChange()
+  }
 
   window.bin = {
     log: function (value) {
