@@ -6,7 +6,7 @@ var path = require('path');
 var mime = require('mime');
 var fs = require('fs');
 
-module.exports = {
+var sandbox = {
   updateSandbox: function (req, res, next) {
 
     var currentEntryFile = utils.getEntry(req.session.files);
@@ -51,7 +51,7 @@ module.exports = {
       var fileName = path.basename(req.url);
       var content = memoryFs.getSessionFile(req.session.id, fileName)
       if (content === null) {
-        return this.getIndex(req, res)
+        return sandbox.getIndex(req, res)
       }
       res.setHeader("Content-Type", mime.lookup(fileName));
       res.setHeader("Content-Length", content.length);
@@ -60,3 +60,5 @@ module.exports = {
 
   }
 };
+
+module.exports = sandbox;
