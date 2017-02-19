@@ -21,7 +21,7 @@ var utils = {
   },
   getManifest: function (packages) {
     return new Promise(function (resolve, reject) {
-      request(config.dllServiceUrl + '/' + utils.getDllName(packages) + '/manifest.json', function(err, resp, body) {
+      request(config.dllServiceUrl + '/' + encodeURIComponent(utils.getDllName(packages)) + '/manifest.json', function(err, resp, body) {
         if (err) {
           reject(err);
 
@@ -113,7 +113,6 @@ var utils = {
   createExternals: function (packages, manifest) {
     return Object.keys(manifest.content).reduce(function (externals, manifestKey, index) {
       var directPath = manifestKey.substr(2).split('/').slice(1).join('/');
-      var packageName = directPath.split('/')[0];
 
       externals[directPath] = 'dll_bundle(' + manifest.content[manifestKey] + ')';
       externals[path.dirname(directPath) + '/' + path.basename(directPath, path.extname(path.basename(directPath)))] = 'dll_bundle(' + manifest.content[manifestKey] + ')';
@@ -124,3 +123,11 @@ var utils = {
 };
 
 module.exports = utils;
+
+/*
+var packageName = Object.keys(packages).reduce((currentPackageName, packageKey) => {
+  if (directPath.match(new RegExp(packageKey + '/'))) {
+    return packageKey
+  }
+}, null)
+*/

@@ -18,7 +18,7 @@ module.exports = {
           path.join('/', 'app', session.id, file.name),
           file.content.replace('</head>', [
             '   <script src="/clienttool/' + clienttoolHash + '" crossorigin></script>',
-            utils.sessionHasPackages(session) ? '   <script src="' + config.dllServiceUrl + '/' + utils.getDllName(session.packages) + '/dll.js" crossorigin></script>' : '',
+            utils.sessionHasPackages(session) ? '   <script src="' + config.dllServiceUrl + '/' + encodeURIComponent(utils.getDllName(session.packages)) + '/dll.js" crossorigin></script>' : '',
             '</head>'
           ].join('\n'))
         );
