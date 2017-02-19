@@ -51,7 +51,7 @@ module.exports = {
       var fileName = path.basename(req.url);
       var content = memoryFs.getSessionFile(req.session.id, fileName)
       if (content === null) {
-        return res.sendStatus(404);
+        return this.getIndex(req, res)
       }
       res.setHeader("Content-Type", mime.lookup(fileName));
       res.setHeader("Content-Length", content.length);
