@@ -43,6 +43,7 @@ var sessionsModule = {
     console.log('Cleaned ' + sessionsToClean.length  + ' sessions');
   },
   middleware: function (req, res, next) {
+    console.log('Got request', sessionsModule.get(req.cookies.webpack_sandbox));
     if (req.cookies.webpack_sandbox && sessionsModule.get(req.cookies.webpack_sandbox)) {
       req.session = sessionsModule.get(req.cookies.webpack_sandbox);
     } else {
