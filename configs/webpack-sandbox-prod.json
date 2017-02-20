@@ -5,7 +5,6 @@
   "dllServiceUrl": "https://cdn.jsdelivr.net/webpack",
   "cookie": {
     "maxAge": 1800000,
-    "domain": "*.herokuapp.com",
     "secure": true
   }
 }
