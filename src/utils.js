@@ -22,7 +22,7 @@ var utils = {
   getManifest: function (packages) {
     return new Promise(function (resolve, reject) {
       var time = Date.now()
-      console.log('Getting manifest');
+      console.log('Getting manifest from: ' + config.dllServiceUrl + '/' + encodeURIComponent(utils.getDllName(packages)) + '/manifest.json');
       request(config.dllServiceUrl + '/' + encodeURIComponent(utils.getDllName(packages)) + '/manifest.json', function(err, resp, body) {
         if (err) {
           reject(err);
@@ -31,6 +31,7 @@ var utils = {
         }
 
         console.log('Got manifest in ' + (Date.now() - time) + 'ms');
+        console.log(resp.headers);
         resolve(JSON.parse(body));
       });
     })
