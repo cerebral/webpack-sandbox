@@ -53,6 +53,7 @@ module.exports = {
           compiler.resolvers.normal.fileSystem = memoryFs.fs;
           compiler.resolvers.context.fileSystem = memoryFs.fs;
 
+          console.log('Compiled created');
           resolve(compiler);
         });
       });

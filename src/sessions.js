@@ -61,6 +61,8 @@ var sessionsModule = {
       if (!compiler) {
         return null;
       }
+
+      console.log('Creating middleware');
       var sessionMiddleware = middleware(compiler, {
         lazy: true,
         filename: new RegExp(session.id),
@@ -74,6 +76,7 @@ var sessionsModule = {
           modules: false
         }
       });
+      console.log('Middleware created');
       sessionsModule.update(session.id, 'middleware', sessionMiddleware);
     };
   },
