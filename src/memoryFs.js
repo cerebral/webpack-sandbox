@@ -46,5 +46,15 @@ module.exports = {
       return null;
     }
     return fs.readFileSync(pathToFile).toString();
+  },
+  clear: function (sessionId) {
+    var pathToSandbox = path.join('/', 'app', sessionId);
+    var filesToRemove = fs.readdirSync(pathToSandbox);
+
+    filesToRemove.forEach(function (fileName) {
+      fs.unlinkSync(path.join(pathToSandbox, fileName));
+    });
+
+    fs.rmdirSync(pathToSandbox);
   }
 };

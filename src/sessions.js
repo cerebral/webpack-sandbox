@@ -3,14 +3,17 @@ var utils = require('./utils.js');
 var path = require('path');
 var uuid = require('uuid');
 var middleware = require('./middleware');
+var memoryFs = require('./memoryFs');
 var sessions = {};
 
 var sessionsModule = {
   get: function (id) {
     var session = sessions[id];
+
     if (session) {
       sessions[id].lastUpdate = Date.now();
     }
+
     return session;
   },
   set: function (id) {
@@ -28,12 +31,16 @@ var sessionsModule = {
   },
   clean: function () {
     var now = Date.now();
-    sessions = Object.keys(sessions).filter(function (key) {
-      return now - sessions[key].lastUpdate < config.sessionsMaxAge;
-    }).reduce(function (remainingSessions, key) {
-      remainingSessions[key] = sessions[key];
-      return remainingSessions;
-    }, {});
+    var sessionsToClean = Object.keys(sessions).filter(function (key) {
+      return now - sessions[key].lastUpdate >= config.sessionsMaxAge;
+    });
+
+    sessionsToClean.forEach(function (sessionId) {
+      memoryFs.clear(sessionId);
+      delete sessions[sessionId];
+    });
+
+    console.log('Cleaned ' + sessionsToClean.length  + ' sessions');
   },
   middleware: function (req, res, next) {
     if (req.cookies.webpack_sandbox && sessionsModule.get(req.cookies.webpack_sandbox)) {

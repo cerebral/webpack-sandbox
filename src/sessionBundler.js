@@ -16,7 +16,9 @@ module.exports = {
       )
       .then(function (manifest) {
 
-        var externals = utils.sessionHasPackages(session) ? utils.createExternals(session.packages, manifest) : []
+        var externals = utils.sessionHasPackages(session) ? utils.createExternals(session.packages, manifest) : {}
+
+        console.log('Creating compiler with ' + Object.keys(externals).length + ' externals');
 
         return new Promise(function (resolve, reject) {
           var compiler = webpack({
