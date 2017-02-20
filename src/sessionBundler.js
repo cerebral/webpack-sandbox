@@ -11,6 +11,8 @@ module.exports = {
       return Promise.resolve(null);
     }
 
+    console.log('Preparing compiler...');
+
     return (
         utils.sessionHasPackages(session) ? utils.getManifest(session.packages) : Promise.resolve(null)
       )
