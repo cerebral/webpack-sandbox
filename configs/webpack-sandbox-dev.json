@@ -2,7 +2,7 @@
   "clientOrigin": "http://localhost:3000",
   "sessionsCleanInterval": 300000,
   "sessionsMaxAge": 1800000,
-  "dllServiceUrl": "https://cdn.jsdelivr.net/webpack",
+  "dllServiceUrl": "http://localhost:5000",
   "cookie": {
     "maxAge": 86400000,
     "domain": ""

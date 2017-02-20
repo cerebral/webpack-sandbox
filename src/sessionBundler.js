@@ -11,16 +11,12 @@ module.exports = {
       return Promise.resolve(null);
     }
 
-    console.log('Preparing compiler...');
-
     return (
         utils.sessionHasPackages(session) ? utils.getManifest(session.packages) : Promise.resolve(null)
       )
       .then(function (manifest) {
 
         var externals = utils.sessionHasPackages(session) ? utils.createExternals(session.packages, manifest) : {}
-
-        console.log('Creating compiler with ' + Object.keys(externals).length + ' externals');
 
         return new Promise(function (resolve, reject) {
           var compiler = webpack({
@@ -55,7 +51,6 @@ module.exports = {
           compiler.resolvers.normal.fileSystem = memoryFs.fs;
           compiler.resolvers.context.fileSystem = memoryFs.fs;
 
-          console.log('Compiled created');
           resolve(compiler);
         });
       });

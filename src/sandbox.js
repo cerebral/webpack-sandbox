@@ -12,7 +12,6 @@ var sandbox = {
     var currentEntryFile = utils.getEntry(req.session.files);
 
     if (utils.hasChangedPackagesOrEntry(req) || !utils.isSameLoaders(req.session.loaders, req.body.loaders)) {
-      console.log('Removing middleware');
       sessions.removeMiddleware(req);
     }
 

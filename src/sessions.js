@@ -43,7 +43,6 @@ var sessionsModule = {
     console.log('Cleaned ' + sessionsToClean.length  + ' sessions');
   },
   middleware: function (req, res, next) {
-    console.log(req.method, req.url);
     if (req.cookies.webpack_sandbox && sessionsModule.get(req.cookies.webpack_sandbox)) {
       req.session = sessionsModule.get(req.cookies.webpack_sandbox);
     } else {
@@ -63,7 +62,6 @@ var sessionsModule = {
         return null;
       }
 
-      console.log('Creating middleware');
       var sessionMiddleware = middleware(compiler, {
         lazy: true,
         filename: new RegExp(session.id),
@@ -77,7 +75,7 @@ var sessionsModule = {
           modules: false
         }
       });
-      console.log('Middleware created');
+
       sessionsModule.update(session.id, 'middleware', sessionMiddleware);
     };
   },
