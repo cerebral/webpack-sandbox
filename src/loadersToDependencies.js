@@ -2,6 +2,7 @@ module.exports = function (loaders) {
   return Object.keys(loaders).reduce(function (depLoaders, loader) {
 
     if (loader === 'babel') {
+      depLoaders['babel-core'] = '^6.23.1';
       depLoaders['babel-loader'] = '^6.2.10';
       if (loaders[loader].es2015) {
         depLoaders['babel-preset-es2015'] = '^6.22.0';

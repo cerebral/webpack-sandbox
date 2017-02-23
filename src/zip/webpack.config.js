@@ -6,16 +6,15 @@ var loaders = $LOADERS$;
 
 module.exports = {
   devtool: 'eval-source-map',
-  entry: path.resolve('src', 'main.js'),
+  entry: path.resolve('src', '$ENTRY_FILENAME$'),
   output: {
     path: path.resolve('build'),
-    filename: 'main.js',
+    filename: '$ENTRY_FILENAME$',
     publicPath: '/'
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve('src', 'index.tpl.html'),
-      inject: 'body',
       filename: 'index.html'
     })
   ],

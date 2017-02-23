@@ -42,16 +42,15 @@ module.exports = function (req, res) {
     return loader;
   });
   var loadersString = JSON.stringify(loaders, null, 2);
-  var findRegexps = /\$\$(.*?)\$\$/g;
-  var matches = loadersString.match(findRegexps);
+  var regexps = /\$\$(.*?)\$\$/g;
+  var matches = loadersString.match(regexps);
   loadersString = (matches || []).reduce(function (loadersString, match) {
     return loadersString.replace('"' + match + '"', match.replace(/\$\$/g, '').replace('\\\\', '\\'));
   }, loadersString);
   var webpackConfig = defaultFiles['webpack.config.js'].replace(
     '$LOADERS$',
     loadersString
-  );
-
+  )
   var zip = new Zip();
 
   req.session.files.forEach(function (file) {
@@ -59,6 +58,9 @@ module.exports = function (req, res) {
       zip.file('src/index.tpl.html', memoryFs.getSessionFile(req.session.id, file.name))
     } else {
       zip.file('src/' + file.name, memoryFs.getSessionFile(req.session.id, file.name))
+    }
+    if (file.isEntry) {
+      webpackConfig = webpackConfig.replace(/\$ENTRY_FILENAME\$/g, file.name)
     }
   });
 
