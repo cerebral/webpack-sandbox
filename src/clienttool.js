@@ -79,11 +79,12 @@
     onUrlChange()
   }
 
-  window.bin = {
-    log: function (value) {
-      window.parent.postMessage({type: "log", value: createValue(value)}, {{ORIGIN}});
-    }
-  };
+  var log = console.log
+  console.log = function () {
+    window.parent.postMessage({type: "log", value: createValue(arguments[0])}, {{ORIGIN}});
+
+    return log.apply(console, arguments)
+  }
 
   window.onmessage = function (event) {
     if (event.data.type === 'url') {
