@@ -1,5 +1,5 @@
 {
-  "clientOrigin": "https://webpackbin-prod.firebaseapp.com",
+  "clientOrigin": "https://www.webpackbin.com",
   "sessionsCleanInterval": 300000,
   "sessionsMaxAge": 1800000,
   "dllServiceUrl": "https://cdn.jsdelivr.net/webpack",
