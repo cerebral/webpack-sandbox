@@ -25,6 +25,7 @@ var utils = {
       console.log('Getting manifest from: ' + config.dllServiceUrl + '/' + encodeURIComponent(utils.getDllName(packages)) + '/manifest.json');
       request(config.dllServiceUrl + '/' + encodeURIComponent(utils.getDllName(packages)) + '/manifest.json', function(err, resp, body) {
         if (err) {
+          console.log('Manifest ERROR', err.code, err.message);
           reject(err);
 
           return;
@@ -34,8 +35,9 @@ var utils = {
         console.log(JSON.stringify(resp.headers));
         try {
           resolve(JSON.parse(body));
-        } catch (e) {
-          reject(e);
+        } catch (err) {
+          console.log('Manifest ERROR', err.message);
+          reject(err);
         }
       });
     })

@@ -30,7 +30,11 @@ var sandbox = {
         })
         .catch(function (err) {
           utils.logError(err)
-          res.sendStatus(500)
+          if (err.code === 'ETIMEDOUT') {
+            res.sendStatus(524);
+          } else {
+            res.send(500);
+          }
         });
     }
   },
