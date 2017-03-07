@@ -32,7 +32,11 @@ var utils = {
 
         console.log('Got manifest in ' + (Date.now() - time) + 'ms');
         console.log(JSON.stringify(resp.headers));
-        resolve(JSON.parse(body));
+        try {
+          resolve(JSON.parse(body));
+        } catch (e) {
+          reject(e);
+        }
       });
     })
   },

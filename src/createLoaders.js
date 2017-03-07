@@ -73,7 +73,13 @@ module.exports = function (currentLoaders) {
         files: ['just-a-hack'],
         compilerOptions: {
           jsx: 'react',
-          target: 'es5'
+          noImplicitAny: false,
+          removeComments: false,
+          target: 'es5',
+          emitDecoratorMetadata: true,
+          experimentalDecorators: true,
+          module: 'commonjs',
+          moduleResolution: 'node'
         }
       }
     }

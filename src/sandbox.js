@@ -28,7 +28,10 @@ var sandbox = {
         .then(function () {
           res.sendStatus(200);
         })
-        .catch(utils.logError);
+        .catch(function (err) {
+          utils.logError(err)
+          res.sendStatus(500)
+        });
     }
   },
   getIndex: function (req, res) {
