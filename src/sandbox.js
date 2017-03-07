@@ -31,7 +31,7 @@ var sandbox = {
         .catch(function (err) {
           utils.logError(err)
           if (err.code === 'ETIMEDOUT') {
-            res.sendStatus(524);
+            res.sendStatus(503);
           } else {
             res.send(500);
           }
