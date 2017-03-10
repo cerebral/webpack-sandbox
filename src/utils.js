@@ -36,7 +36,7 @@ var utils = {
         try {
           resolve(JSON.parse(body));
         } catch (err) {
-          console.log('Manifest ERROR', err.message);
+          console.log('Manifest ERROR', err.message, body);
           reject(err);
         }
       });
