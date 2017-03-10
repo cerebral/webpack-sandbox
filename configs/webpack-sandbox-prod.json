@@ -6,5 +6,6 @@
   "cookie": {
     "maxAge": 1800000,
     "secure": true
-  }
+  },
+  "connectTimeout": 25000
 }

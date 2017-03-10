@@ -7,5 +7,6 @@
     "maxAge": 86400000,
     "domain": "webpack-sandbox.herokuapp.com",
     "secure": true
-  }
+  },
+  "connectTimeout": 25000
 }
