@@ -31,10 +31,11 @@ var utils = {
           return;
         }
 
-        console.log('Got manifest in ' + (Date.now() - time) + 'ms', typeof body);
+        console.log('Got manifest in ' + (Date.now() - time) + 'ms');
         console.log(JSON.stringify(resp.headers));
         try {
           resolve(JSON.parse(body));
+          console.log('Parsed', body);
         } catch (err) {
           console.log('Manifest ERROR', err.message, body);
           reject(err);
