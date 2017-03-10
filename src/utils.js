@@ -31,7 +31,7 @@ var utils = {
           return;
         }
 
-        console.log('Got manifest in ' + (Date.now() - time) + 'ms');
+        console.log('Got manifest in ' + (Date.now() - time) + 'ms', typeof body);
         console.log(JSON.stringify(resp.headers));
         try {
           resolve(JSON.parse(body));
