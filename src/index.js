@@ -30,7 +30,8 @@ preloadPackages([
   'css-loader',
   'pug-runtime',
   'handlebars',
-  'webpack'
+  'webpack',
+  'ts-loader'
 ]);
 
 app.use(cookieParser());

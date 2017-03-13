@@ -3,8 +3,6 @@ var path = require('path');
 var fs = new MemoryFileSystem();
 var utils = require('./utils');
 var config = require(`../configs/${process.env.WEBPACK_SANDBOX_ENV}.json`)
-var md5File = require('md5-file');
-var clienttoolHash = md5File.sync(path.resolve('src', 'clienttool.js'))
 
 module.exports = {
   fs: fs,
@@ -13,21 +11,10 @@ module.exports = {
       fs.mkdirpSync(path.join('/', 'app', session.id));
     }
     files.forEach(function (file) {
-      if (file.name === 'index.html') {
-        fs.writeFileSync(
-          path.join('/', 'app', session.id, file.name),
-          file.content.replace('</head>', [
-            '   <script src="/clienttool/' + clienttoolHash + '" crossorigin></script>',
-            utils.sessionHasPackages(session) ? '   <script src="' + config.dllServiceUrl + '/' + encodeURIComponent(utils.getDllName(session.packages)) + '/dll.js" crossorigin></script>' : '',
-            '</head>'
-          ].join('\n'))
-        );
-      } else {
-        fs.writeFileSync(
-          path.join('/', 'app', session.id, file.name),
-          file.content || ' '
-        );
-      }
+      fs.writeFileSync(
+        path.join('/', 'app', session.id, file.name),
+        file.content || ' '
+      );
     });
 
     var filesToDelete = session.files.filter(function (sessionFile) {

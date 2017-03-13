@@ -1,3 +1,4 @@
+var config = require(`../configs/${process.env.WEBPACK_SANDBOX_ENV}.json`)
 var sessionBundler = require('./sessionBundler.js');
 var memoryFs = require('./memoryFs');
 var utils = require('./utils');
@@ -5,6 +6,8 @@ var sessions = require('./sessions');
 var path = require('path');
 var mime = require('mime');
 var fs = require('fs');
+var md5File = require('md5-file');
+var clienttoolHash = md5File.sync(path.resolve('src', 'clienttool.js'))
 
 var sandbox = {
   updateSandbox: function (req, res, next) {
@@ -44,7 +47,15 @@ var sandbox = {
     res.setHeader('Pragma', 'no-cache');
     res.type('html');
 
-    res.send(memoryFs.getSessionFile(req.session.id, 'index.html'));
+    res.send(
+      memoryFs.getSessionFile(req.session.id, 'index.html')
+        .replace('</head>', [
+          '   <script src="/clienttool/' + clienttoolHash + '" crossorigin></script>',
+          utils.sessionHasPackages(req.session) ? '   <script src="' + config.dllServiceUrl + '/' + encodeURIComponent(utils.getDllName(req.session.packages)) + '/dll.js" crossorigin></script>' : '',
+          '</head>'
+        ].join('\n')
+      )
+    );
   },
   getFile: function (req, res, next) {
     if (!req.session.middleware) {

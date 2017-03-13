@@ -70,16 +70,17 @@ module.exports = function (currentLoaders) {
         transpileOnly: true,
         isolatedModules: true,
         silent: true,
-        files: ['just-a-hack'],
+        files: [
+          'just-a-hack'
+        ],
+        entryFileIsJs: true,
         compilerOptions: {
           jsx: 'react',
           noImplicitAny: false,
           removeComments: false,
           target: 'es5',
           emitDecoratorMetadata: true,
-          experimentalDecorators: true,
-          module: 'commonjs',
-          moduleResolution: 'node'
+          experimentalDecorators: true
         }
       }
     }
