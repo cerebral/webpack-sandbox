@@ -55,12 +55,12 @@ module.exports = function (req, res) {
 
   req.session.files.forEach(function (file) {
     if (file.name === 'index.html') {
-      zip.file('src/index.tpl.html', memoryFs.getSessionFile(req.session.id, file.name))
+      zip.file('src/index.tpl.html', memoryFs.getSessionFile(req.session.id, file.name).replace('.ts"></script>', '.js"></script>'))
     } else {
       zip.file('src/' + file.name, memoryFs.getSessionFile(req.session.id, file.name))
     }
     if (file.isEntry) {
-      webpackConfig = webpackConfig.replace(/\$ENTRY_FILENAME\$/g, file.name)
+      webpackConfig = webpackConfig.replace(/\$ENTRY_FILENAME\$/g, file.name.replace(/.ts$/, '.js'))
     }
   });
 
