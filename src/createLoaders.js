@@ -10,7 +10,7 @@ module.exports = function (currentLoaders) {
   // BABEL
   if (currentLoaders.babel) {
     var loader = {
-      test: /\.js?$/,
+      test: /\.jsx?$/,
       exclude: /node_modules/,
       loader: 'babel-loader',
       query: {
