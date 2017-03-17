@@ -27,6 +27,7 @@ setInterval(sessions.clean, config.sessionsCleanInterval);
 
 preloadPackages([
   'style-loader',
+  'vue-style-loader',
   'css-loader',
   'pug-runtime',
   'handlebars',
