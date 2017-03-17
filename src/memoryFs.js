@@ -11,6 +11,12 @@ module.exports = {
       fs.mkdirpSync(path.join('/', 'app', session.id));
     }
     files.forEach(function (file) {
+      const directory = path.dirname(file.name);
+
+      if (!fs.existsSync(path.join('/', 'app', session.id, directory))) {
+        fs.mkdirpSync(path.join('/', 'app', session.id, directory));
+      }
+
       fs.writeFileSync(
         path.join('/', 'app', session.id, file.name),
         file.content || ' '
@@ -36,9 +42,18 @@ module.exports = {
   },
   clear: function (sessionId) {
     var pathToSandbox = path.join('/', 'app', sessionId);
+
+    if (!fs.existsSync(pathToSandbox)) {
+      return;
+    }
+
     var filesToRemove = fs.readdirSync(pathToSandbox);
 
     filesToRemove.forEach(function (fileName) {
+      if (!fs.existsSync(path.join(pathToSandbox, fileName))) {
+        return;
+      }
+
       fs.unlinkSync(path.join(pathToSandbox, fileName));
     });
 
