@@ -36,7 +36,7 @@ module.exports = {
               modules: [path.resolve('node_modules'), path.join('/', 'node_modules')]
             },
             module: {
-              loaders: createLoaders(session.loaders)
+              loaders: createLoaders(session.loaders, require.resolve.bind(require))
             },
             plugins: manifest ? [
               new webpack.DllReferencePlugin({

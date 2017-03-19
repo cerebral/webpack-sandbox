@@ -33,7 +33,8 @@ module.exports = function (req, res) {
     "license": "ISC"
   };
 
-  var loaders = createLoaders(req.session.loaders || {}).map(function (loader) {
+  var resolve = function (value) { return value; };
+  var loaders = createLoaders(req.session.loaders || {}, resolve).map(function (loader) {
     loader.test = '$$' + loader.test.toString() + '$$';
     if (loader.exclude) {
       loader.exclude = '$$' + loader.exclude.toString() + '$$';
