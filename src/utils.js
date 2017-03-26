@@ -123,9 +123,17 @@ var utils = {
   createExternals: function (packages, manifest) {
     return Object.keys(manifest.content).reduce(function (externals, manifestKey, index) {
       var directPath = manifestKey.substr(2).split('/').slice(1).join('/');
+      var fileName = path.basename(directPath)
+      var extName = path.extname(directPath)
+      var baseName = path.basename(fileName, extName)
 
       externals[directPath] = 'dll_bundle(' + manifest.content[manifestKey] + ')';
-      externals[path.dirname(directPath) + '/' + path.basename(directPath, path.extname(path.basename(directPath)))] = 'dll_bundle(' + manifest.content[manifestKey] + ')';
+      externals[path.dirname(directPath) + '/' + baseName] = 'dll_bundle(' + manifest.content[manifestKey] + ')';
+
+      if (fileName === 'index.js') {
+        console.log('y000');
+        externals[path.dirname(directPath)] = 'dll_bundle(' + manifest.content[manifestKey] + ')';
+      }
 
       return externals;
     }, {});
