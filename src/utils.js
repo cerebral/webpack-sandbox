@@ -130,8 +130,7 @@ var utils = {
       externals[directPath] = 'dll_bundle(' + manifest.content[manifestKey] + ')';
       externals[path.dirname(directPath) + '/' + baseName] = 'dll_bundle(' + manifest.content[manifestKey] + ')';
 
-      if (fileName === 'index.js') {
-        console.log('y000');
+      if (!directPath.match(/node_modules/) && fileName === 'index.js') {
         externals[path.dirname(directPath)] = 'dll_bundle(' + manifest.content[manifestKey] + ')';
       }
 
@@ -141,11 +140,3 @@ var utils = {
 };
 
 module.exports = utils;
-
-/*
-var packageName = Object.keys(packages).reduce((currentPackageName, packageKey) => {
-  if (directPath.match(new RegExp(packageKey + '/'))) {
-    return packageKey
-  }
-}, null)
-*/
