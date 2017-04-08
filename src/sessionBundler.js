@@ -15,9 +15,6 @@ module.exports = {
         utils.sessionHasPackages(session) ? utils.getManifest(session.packages) : Promise.resolve(null)
       )
       .then(function (manifest) {
-
-        var externals = utils.sessionHasPackages(session) ? utils.createExternals(session.packages, manifest) : {}
-
         return new Promise(function (resolve, reject) {
           var compiler = webpack({
             devtool: 'cheap-source-map',
@@ -44,7 +41,7 @@ module.exports = {
                 manifest: manifest
               })
             ] : [],
-            externals
+            externals: manifest ? manifest.externals : []
           });
 
           compiler.inputFileSystem = memoryFs.fs;

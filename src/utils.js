@@ -33,11 +33,10 @@ var utils = {
 
         console.log('Got manifest in ' + (Date.now() - time) + 'ms');
         console.log(JSON.stringify(resp.headers));
-        try {
+        if (resp.statusCode === 200) {
           resolve(JSON.parse(body));
-        } catch (err) {
-          console.log('Manifest ERROR', err.message, body);
-          reject(err);
+        } else {
+          reject(new Error(body));
         }
       });
     })
