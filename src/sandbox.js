@@ -32,7 +32,7 @@ var sandbox = {
           res.sendStatus(200);
         })
         .catch(function (err) {
-          if (err.code === 'ETIMEDOUT') {
+          if (err.code === 'ETIMEDOUT' || err.message === 'PACKAGER_NOT_AVAILABLE') {
             res.sendStatus(503);
           } else {
             res.status(500).send(err.message);
