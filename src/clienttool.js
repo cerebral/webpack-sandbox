@@ -39,6 +39,10 @@
           __webpackbin_type_function: true,
           name: getFunctionName(value) || 'Anonymous'
         };
+      } else if (typeof value === 'undefined') {
+        return {
+          __webpackbin_type_undefined: true
+        };
       } else if (Array.isArray(value)) {
         refs.push(value);
         return value.map(createValue);

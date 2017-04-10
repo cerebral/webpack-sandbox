@@ -30,7 +30,7 @@ module.exports = function (currentLoaders, resolve) {
     if (currentLoaders.babel.jsx) {
       loader.query.plugins.push([
         resolve('babel-plugin-transform-react-jsx'), {
-          pragma: currentLoaders.babel.jsx.pragma
+          pragma: currentLoaders.babel.jsx
         }
       ]);
     }
