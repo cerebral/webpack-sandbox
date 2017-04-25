@@ -2,7 +2,7 @@
   "clientOrigin": "https://webpackbin-test.firebaseapp.com",
   "sessionsCleanInterval": 300000,
   "sessionsMaxAge": 1800000,
-  "dllServiceUrl": "https://webpack-dll.herokuapp.com/v1",
+  "dllServiceUrl": "https://webpack-dll.herokuapp.com/v2",
   "cookie": {
     "maxAge": 86400000,
     "domain": "webpack-sandbox.herokuapp.com",

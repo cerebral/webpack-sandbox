@@ -2,7 +2,7 @@
   "clientOrigin": "https://www.webpackbin.com",
   "sessionsCleanInterval": 300000,
   "sessionsMaxAge": 1800000,
-  "dllServiceUrl": "https://cdn.jsdelivr.net/webpack/v1",
+  "dllServiceUrl": "https://cdn.jsdelivr.net/webpack/v2",
   "cookie": {
     "maxAge": 1800000,
     "secure": true
