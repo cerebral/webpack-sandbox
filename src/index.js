@@ -62,8 +62,6 @@ console.log('Running Webpack Sandbox version: ', require('../package.json').vers
 
 var server = app.listen(process.env.NODE_ENV === 'production' ? process.env.PORT : 4000);
 
-server.timeout = config.connectTimeout;
-
 process.on('SIGTERM', function () {
   server.close(function () {
     console.log('Graceful shutdown successful');
