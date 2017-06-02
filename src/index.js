@@ -26,6 +26,7 @@ memoryFs.fs.mkdirpSync(path.join('/', 'app'));
 setInterval(sessions.clean, config.sessionsCleanInterval);
 
 preloadPackages([
+  'babel-runtime',
   'style-loader',
   'vue-style-loader',
   'css-loader',
