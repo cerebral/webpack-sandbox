@@ -28,6 +28,7 @@ module.exports = function (loaders) {
     }
 
     if (loader === 'css') {
+      depLoaders['style-loader'] = '^0.13.0';
       depLoaders['css-loader'] = '^0.23.1';
     }
 
