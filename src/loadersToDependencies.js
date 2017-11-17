@@ -41,7 +41,7 @@ module.exports = function (loaders) {
     }
 
     if (loader === 'typescript') {
-      depLoaders['ts-loader'] = '2.0.0';
+      depLoaders['ts-loader'] = '2.3.7';
       depLoaders['typescript'] = '2.0.10';
     }
 
