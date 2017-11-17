@@ -68,13 +68,13 @@ module.exports = function (currentLoaders, resolve) {
       loader: 'ts-loader',
       options: {
         transpileOnly: true,
-        isolatedModules: true,
         silent: true,
         files: [
           'just-a-hack'
         ],
         entryFileIsJs: true,
         compilerOptions: {
+          isolatedModules: true,
           jsx: 'react',
           noImplicitAny: false,
           removeComments: false,
