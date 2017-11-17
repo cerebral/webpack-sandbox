@@ -69,9 +69,6 @@ module.exports = function (currentLoaders, resolve) {
       options: {
         transpileOnly: true,
         silent: true,
-        files: [
-          'just-a-hack'
-        ],
         entryFileIsJs: true,
         compilerOptions: {
           isolatedModules: true,
